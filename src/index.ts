@@ -71,9 +71,10 @@ export default (crowi: Crowi): CrowiUploader => {
           .on("error", (err) => {
             reject(err);
           })
-          .on("finish", async () => {
-            await file.makePublic();
-            resolve();
+          .on("finish", () => {
+            file.makePublic(() => {
+              resolve();
+            });
           });
       }),
     deleteFile: async (fileId, filePath) => {
