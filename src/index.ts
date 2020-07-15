@@ -71,7 +71,8 @@ export default (crowi: Crowi): CrowiUploader => {
           .on("error", (err) => {
             reject(err);
           })
-          .on("finish", () => {
+          .on("finish", async () => {
+            await file.makePublic();
             resolve();
           });
       }),
